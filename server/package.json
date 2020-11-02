@@ -1,0 +1,17 @@
+{
+  "name": "shortt-server",
+  "version": "0.1.0",
+  "description": "server component for url shortening service provided by yours truly",
+  "main": "server.js",
+  "repository": "https://github.com/dmattox10/shortt",
+  "author": "Daniel Mattox",
+  "license": "MIT",
+  "private": false,
+  "dependencies": {
+    "config": "^3.3.2",
+    "express": "^4.17.1",
+    "mongoose": "^5.10.11",
+    "nanoid": "^3.1.16",
+    "valid-url": "^1.0.9"
+  }
+}
