@@ -2,7 +2,7 @@ const express = require("express");
 const nanoid = require("nanoid");
 const validUrl = require("valid-url");
 const config = require("config");
-const Url = require("../mongomodel/url");
+const Url = require("../models/url");
 
 var shortUrlRoute = express.Router();
 
@@ -10,7 +10,7 @@ shortUrlRoute.post("/", async (req, res)=>{
     const longUrl = req.body.longUrl;
     const baseUrl = config.get("baseURL");
     if(!validUrl.isUri(baseUrl)){
-        return res.status(401).json("Internal error. Please come back later.");
+        return res.status(401).json("Internal error. Please come back later."); // Shouldn't I tell the  user their URL wasn't valid?
     }
 
     const urlCode = nanoid(10);
