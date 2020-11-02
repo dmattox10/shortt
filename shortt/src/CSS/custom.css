@@ -1,0 +1,53 @@
+.App {
+    width: 100%;
+}
+.message {
+    box-sizing: inherit;
+    color: white;
+    font-family: sans-serif;
+}
+.show {
+    position: relative;
+    background-color: #2329B7;
+    color: white;
+    border-bottom: none;
+    display: block;
+    left: 0;
+    right: 0;
+    height: 50px;
+    z-index: 110;
+    top: 0;
+}
+.content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 100%;
+}
+.left-content {
+    padding-right: 15px;
+    width: 100%;
+    justify-content: center;
+    padding-left: 15px;
+    display: flex;
+    align-items: center;
+
+}
+.countdown-text {
+    font-size: 16px;
+    /* font-family */
+    font-weight: 300;
+    display: flex;
+    align-items: center;
+    letter-spacing: 2px;
+}
+.inner-img {
+    width: 34px;
+    margin-left: 10px;
+    height: auto;
+    display: block;
+    border: 0;
+}
+.row {
+    padding-top: 1.8rem;
+}
