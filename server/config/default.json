@@ -1,4 +1,4 @@
 {
     "mongoURI": "mongodb://localhost:27017/shortt",
-    "baseURL": "http://localhost:5555/v1"
+    "baseURL": "https://shortt.danielmattox.com/v1"
 }
