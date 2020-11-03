@@ -1,5 +1,9 @@
 import { Card, CardTitle, Row, Col, Form, FormGroup, Label, Input, FormText, CustomInput } from 'reactstrap'
-const Banner = props => {
+import { useFormik } from 'formik'
+import * as Yup from 'yup'
+import { useContext } from 'react'
+import { addUrl } from '../contexts/shorttContext'
+const Hero = props => {
     return (
         <Row>
             <Col xs='12'>
@@ -41,4 +45,4 @@ const Banner = props => {
     )
 }
 
-export default Banner
+export default Hero
