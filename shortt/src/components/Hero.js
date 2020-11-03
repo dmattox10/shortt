@@ -7,9 +7,9 @@ const Hero = props => {
     return (
         <Row>
             <Col xs='12'>
-            <Card body style={{border: 'none'}}>
+            <Card body>
                     <CardTitle><h3>This is where the magic happens!</h3></CardTitle>
-                    <Card body>
+                    <Card style={{border: 'none'}}>
                         <Form>
                             <FormGroup row>
                                 <Label for='longUrl' sm={3} size='lg'>URL to shorten</Label>

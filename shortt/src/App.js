@@ -25,7 +25,7 @@ function App() {
         <Container>
           <Row>
             <Col xs='3'>
-              <Stats />
+              <Stats stats={stats}/>
             </Col>
             <Col xs='9'>
               <Route exact path='/' component={ Hero } />
