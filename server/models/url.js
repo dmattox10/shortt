@@ -4,7 +4,8 @@ const urlSchema = new mongoose.Schema({
     urlCode: String,
     longUrl: String,
     shortUrl: String,
-    clickCount: Number
+    clickCount: Number,
+    private: Boolean
 });
 
 module.exports = mongoose.model("url", urlSchema);

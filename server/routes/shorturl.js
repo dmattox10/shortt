@@ -1,28 +1,37 @@
 const express = require("express");
-const nanoid = require("nanoid");
+const { nanoid }  = require("nanoid/non-secure");
 const validUrl = require("valid-url");
 const config = require("config");
 const Url = require("../models/url");
+const cors = require('cors')
+
 
 var shortUrlRoute = express.Router();
 
-shortUrlRoute.post("/", async (req, res)=>{
+shortUrlRoute.post("/", cors(), async (req, res)=>{
     const longUrl = req.body.longUrl; // The URL the user wants to shorten
     const baseUrl = config.get("baseURL"); // Our server
     const urlSuffix = req.body.urlSuffix // The code the user wants to change it to
     const urlCode = nanoid(10); // An alternative code the user could use if theirs isn't available
+    const privateLink = req.body.private
 
     if(validUrl.isUri(longUrl)){
 
         try{
-            var url = await Url.findOne({longUrl : longUrl});
+            var url = await Url.findOne({longUrl : longUrl})
             if(url){
-                return  res.status(200).json(url); // If we get back a string that already exists, the frontend should tell the user
+                return  res.status(200).json({
+                    message: 'That URL already has a shortened version in the system!',
+                    try: url.shortUrl
+                }) // If we get back a string that already exists, the frontend should tell the user
             }else{
 
                 var suffixed = await Url.findOne({urlCode: urlSuffix})
                 if (suffixed){
-                    return res.status(200).json(suffixed, urlCode) // If someone else used this suffix in a URL, suggest the short code
+                    return res.status(200).json({
+                        message: 'That shortened URL exists in the system, try another suffix',
+                        blurb: urlCode
+                    }) // If someone else used this suffix in a URL, suggest the short code
                 }
                 else {
                     // const shortUrl = baseUrl + "/" + urlCode;
@@ -31,11 +40,12 @@ shortUrlRoute.post("/", async (req, res)=>{
                         longUrl,
                         shortUrl,
                         urlCode: urlSuffix,
-                        clickCount: 0
-                    });
+                        clickCount: 0,
+                        private: privateLink
+                    })
 
                     await url.save()
-                    return res.status(201).json(url);
+                    return res.status(201).json(url)
                 }
             }
         }catch(err){
