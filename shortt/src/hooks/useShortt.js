@@ -19,11 +19,19 @@ export const useShortt = () => {
     }, [])
 
     const addUrl = data => {
-        return
+        axios.post('http://localhost:5555/v1/shorturl', data).then(res => {
+            console.log(res.data)
+        })
     }
 
     const getStats = () => {
-        return
+        axios.get('http://localhost:5555/stats').then(res => {
+            updateStats({
+                total: res.data.total,
+                clicks: res.data.clicks,
+                visits: res.data.visits
+            })
+        })
     }
 
     return [stats, addUrl, message, blurb]
