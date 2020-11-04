@@ -1,12 +1,14 @@
 import { useState, useEffect } from 'react'
+import { useHistory } from 'react-router-dom'
 import axios from 'axios'
 
 export const useShortt = () => {
     const baseUrl = 'https://shortt.danielmattox.com'
+    const history = useHistory()
     const [stats, updateStats] = useState({
-        total: 88,
-        clicks: 107,
-        visits: 143
+        total: 0,
+        clicks: 0,
+        visits: 0
     })
     const [message, updateMessage] = useState({
         text: null
@@ -17,21 +19,31 @@ export const useShortt = () => {
     const [tryUrl, updateTryUrl] = useState({
         text: null
     })
+    const [origUrl, updateOrigUrl] = useState(null)
 
     useEffect(() => {
         getStats()
     }, [])
 
-    const addUrl = data => {
-        axios.post('http://localhost:5555/v1/shorturl', data).then(res => {
-            if (res.data.blurb) {
-                updateBlurb(res.data.blurb)
-            }
+    const addUrl = values => {
+        axios.post('http://localhost:5555/v1/shorturl', values).then(res => {
+            updateOrigUrl(values.longUrl)
             if (res.data.message) {
-                updateMessage(res.data.message)
+                updateMessage({
+                    text: res.data.message
+                })
             }
-            if (res.data.try) {
-                updateTryUrl(res.data.try)
+            if (res.data.tryUrl) {
+                updateTryUrl({
+                    text: res.data.tryUrl
+                })
+                history.push('/success')
+            }
+            if (res.data.blurb) {
+                updateBlurb({
+                    text: res.data.blurb
+                })
+                history.push('/')
             }
         }).catch(err => {
             if (err.response) { // (5xx, 4xx)
@@ -63,7 +75,21 @@ export const useShortt = () => {
             }
         })
     }
+    const resetAll = () => {
+        updateMessage({
+            text: null
+        })
+        updateBlurb({
+            text: null
+        })
+        updateTryUrl({
+            text:null
+        })
+        updateOrigUrl(null)
+        getStats()
+        history.push('/')
+    }
 
-    return [stats, addUrl, message, blurb, baseUrl, tryUrl]
+    return [stats, addUrl, message, blurb, baseUrl, tryUrl, origUrl, resetAll]
 
 }

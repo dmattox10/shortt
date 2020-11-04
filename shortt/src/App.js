@@ -1,5 +1,5 @@
 import { Row, Col, Container } from 'reactstrap'
-
+import { Route } from 'react-router-dom'
 import { shorttContext } from './contexts/shorttContext'
 import { useShortt } from './hooks/useShortt'
 import Message from './components/Message'
@@ -7,13 +7,15 @@ import Banner from './components/Banner'
 import Hero from './components/Hero'
 import Stats from './components/Stats'
 import Presentation from './components/Presentation'
+import Success from './components/Success'
 
-function App() {
+const App = props => {
 
-  const [stats, addUrl, message, blurb, baseUrl, tryUrl] = useShortt()
+  const [stats, addUrl, message, blurb, baseUrl, tryUrl, origUrl, resetAll] = useShortt()
+  console.log(tryUrl.text)
   return (
     <div className="App">
-      <shorttContext.Provider value={{stats, addUrl, message, blurb, baseUrl, tryUrl}}>
+      <shorttContext.Provider value={{stats, addUrl, message, blurb, baseUrl, tryUrl, origUrl, resetAll}}>
         <Message />
         <Row>
           <Container>
@@ -26,7 +28,8 @@ function App() {
               <Stats stats={stats}/>
             </Col>
             <Col xs='9'>
-              <Hero />
+              <Route exact path='/' component={ Hero } />
+              <Route exact path='/success' component={ Success } />
             </Col>
           </Row>
         </Container>

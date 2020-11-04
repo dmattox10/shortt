@@ -1,11 +1,12 @@
 import { Card, CardTitle, Row, Col, Form, FormGroup, Label, Input, FormText, CustomInput, Button } from 'reactstrap'
 import { useFormik } from 'formik'
 import * as Yup from 'yup'
-import { useContext } from 'react'
+import { useContext, useState, useEffect } from 'react'
 import { shorttContext } from '../contexts/shorttContext'
 const Hero = props => {
 
-    const { addUrl, message, blurb, baseUrl } = useContext(shorttContext)
+    const { addUrl, message, blurb, baseUrl, origUrl } = useContext(shorttContext)
+    const [suffix, updateSuffix] = useState('')
 
     const formik = useFormik({
         initialValues: {
@@ -20,9 +21,22 @@ const Hero = props => {
             .matches(/^[0-9a-zA-Z_+-]+$/, 'Must only contain letters, numbers, and +_-')
         }),
         onSubmit: values => {
+            values.urlSuffix = suffix
             addUrl(values)
         },
     })
+
+    useEffect(() => {
+        if (blurb.text !== null) {
+            updateSuffix(blurb.text)
+        }
+        else {
+            updateSuffix(formik.values.urlSuffix)
+        }
+        if (origUrl !== null) {
+            formik.values.longUrl = origUrl
+        }
+    }, [blurb])
 
     return (
         <Row>
@@ -52,11 +66,16 @@ const Hero = props => {
                                 </Col>
                             </FormGroup>
                             <Row>
+                                <Col sm={12}>
+                                    {message.text !== null ? <h5>{message.text}</h5> : null}
+                                </Col>
+                            </Row>
+                            <Row>
                                 <Col sm={2}>
                                     <h4>Preview:</h4>
                                 </Col>
                                 <Col sm={8}>
-                                    <h4>{`${baseUrl}/${formik.values.urlSuffix}`}</h4>
+                                    <h4>{`${baseUrl}/${suffix}`}</h4>
                                 </Col>
                                 <Col sm={2}>
                                     <Button type='submit' color='primary'>Do it!</Button>

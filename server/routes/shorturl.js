@@ -11,8 +11,8 @@ var shortUrlRoute = express.Router();
 shortUrlRoute.post("/", cors(), async (req, res)=>{
     const longUrl = req.body.longUrl; // The URL the user wants to shorten
     const baseUrl = config.get("baseURL"); // Our server
-    const urlSuffix = req.body.urlSuffix // The code the user wants to change it to
-    const urlCode = nanoid(10); // An alternative code the user could use if theirs isn't available
+    const urlCode = nanoid(8)
+    const urlSuffix = req.body.urlSuffix || urlCode // The code the user wants to change it to
     const privateLink = req.body.private
 
     if(validUrl.isUri(longUrl)){
@@ -22,7 +22,7 @@ shortUrlRoute.post("/", cors(), async (req, res)=>{
             if(url){
                 return  res.status(200).json({
                     message: 'That URL already has a shortened version in the system!',
-                    try: url.shortUrl
+                    tryUrl: url.shortUrl
                 }) // If we get back a string that already exists, the frontend should tell the user
             }else{
 
@@ -45,7 +45,10 @@ shortUrlRoute.post("/", cors(), async (req, res)=>{
                     })
 
                     await url.save()
-                    return res.status(201).json(url)
+                    return  res.status(201).json({
+                        message: 'Your URL has been created!',
+                        tryUrl: url.shortUrl
+                    })
                 }
             }
         }catch(err){
