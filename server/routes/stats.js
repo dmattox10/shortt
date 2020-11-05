@@ -23,12 +23,15 @@ statsRoute.get('/', async (req, res) => {
     const totalUrls = clicksArray.length
     const visitors = db.get('visits')
     .value()
-    console.log(clicksArray)
+    const totalClicks = clicksArray.reduce((previous, current) => {
+        return previous + current.clickCount
+    })
+    console.log(totalClicks)
     console.log(totalUrls)
     console.log(visitors)
     res.status(200).json({
         total: totalUrls,
-        clicks: 0,
+        clicks: totalClicks,
         visits: visitors
     })
 })
