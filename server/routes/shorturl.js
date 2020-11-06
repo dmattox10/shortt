@@ -56,10 +56,14 @@ shortUrlRoute.post("/", cors(), bruteforce.prevent, async (req, res)=>{
             }
         }catch(err){
             console.error(err.message);
-            return res.status(500).json("Internal Server error " + err.message);
+            return res.status(500).json({
+                error: `Internal server error: ${err.message}`
+            });
         }
     }else{
-        res.status(400).json("Invalid URL. Please enter a valid url for shortening."); // Present this to the user in an error message
+        res.status(400).json({
+            error: "Invalid URL. Please enter a valid url for shortening."
+        }); // Present this to the user in an error message
     }    
 });
 
