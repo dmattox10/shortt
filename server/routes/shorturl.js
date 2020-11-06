@@ -29,7 +29,7 @@ shortUrlRoute.post("/", cors(), async (req, res)=>{
                 var suffixed = await Url.findOne({urlCode: urlSuffix})
                 if (suffixed){
                     return res.status(200).json({
-                        message: 'That shortened URL exists in the system, try another suffix',
+                        error: 'That shortened URL exists in the system, try another suffix',
                         blurb: urlCode
                     }) // If someone else used this suffix in a URL, suggest the short code
                 }

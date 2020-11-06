@@ -28,14 +28,20 @@ export const useShortt = () => {
     const addUrl = values => {
         axios.post('http://localhost:5555/v1/shorturl', values).then(res => {
             updateOrigUrl(values.longUrl)
-            if (res.data.message) {
-                updateMessage({
-                    text: res.data.message
-                })
-            }
-            if (res.data.tryUrl) {
+            if (res.data.tryUrl && res.data.error) {
                 updateTryUrl({
                     text: res.data.tryUrl
+                })
+                updateMessage({
+                    text: res.data.error
+                })
+            }
+            if (res.data.tryUrl && res.data.message) {
+                updateTryUrl({
+                    text: res.data.tryUrl
+                })
+                updateMessage({
+                    text: res.data.message
                 })
                 history.push('/success')
             }
