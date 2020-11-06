@@ -22,7 +22,6 @@ const Hero = props => {
         }),
         onSubmit: values => {
             values.urlSuffix = suffix
-            console.log(values)
             addUrl(values)
         },
     })
