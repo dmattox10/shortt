@@ -57,12 +57,18 @@ export const useShortt = () => {
             }
         }).catch(err => {
             if (err.response) { // (5xx, 4xx)
-                console.log(err)
+                updateMessage({
+                    text: err.error
+                })
             }
             else if (err.request) { // No response or unable to send
-                console.log(err)
+                updateMessage({
+                    text: 'The server could not be reached.'
+                })
             } else { // The world is ending
-                console.log(err)
+                updateMessage({
+                    text: 'The world is literally ending, right now.'
+                })
             }
         })
     }
@@ -76,12 +82,18 @@ export const useShortt = () => {
             })
         }).catch(err => {
             if (err.response) { // (5xx, 4xx)
-                console.log(err)
+                updateMessage({
+                    text: err.error
+                })
             }
             else if (err.request) { // No response or unable to send
-                console.log(err)
+                updateMessage({
+                    text: 'The server could not be reached.'
+                })
             } else { // The world is ending
-                console.log(err)
+                updateMessage({
+                    text: 'The world is literally ending, right now.'
+                })
             }
         })
     }
