@@ -45,11 +45,14 @@ export const useShortt = () => {
                 })
                 history.push('/success')
             }
-            if (res.data.blurb) {
+            if (res.data.blurb && res.data.error) {
                 updateBlurb({
                     text: res.data.blurb
                 })
-                history.push('/')
+                updateMessage({
+                    text: res.data.error
+                })
+                
             }
         }).catch(err => {
             if (err.response) { // (5xx, 4xx)

@@ -19,4 +19,4 @@ app.get('/', (req, res) => {
     res.send('<h2>“The code is more what you’d call ‘guidelines’ than actual rules.” – Hector Barbossa</h2>')
 })
 const PORT = 5555
-app.listen(PORT, () => console.log("Server is listening on port " + PORT + ' ' + Date.now()))
+app.listen(PORT, () => console.log(`'Ello ${PORT}.`))

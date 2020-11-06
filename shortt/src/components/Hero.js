@@ -22,6 +22,7 @@ const Hero = props => {
         }),
         onSubmit: values => {
             values.urlSuffix = suffix
+            console.log(values)
             addUrl(values)
         },
     })
@@ -29,6 +30,7 @@ const Hero = props => {
     useEffect(() => {
         if (blurb.text !== null) {
             updateSuffix(blurb.text)
+            formik.values.urlSuffix = blurb.text
         }
         else {
             updateSuffix(formik.values.urlSuffix)
@@ -36,7 +38,7 @@ const Hero = props => {
         if (origUrl !== null) {
             formik.values.longUrl = origUrl
         }
-    }, [blurb])
+    }, [blurb, formik.values.urlSuffix])
 
     return (
         <Row>
