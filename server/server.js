@@ -18,5 +18,5 @@ app.use('/stats', statsRoute)
 app.get('/', (req, res) => {
     res.send('<h2>“The code is more what you’d call ‘guidelines’ than actual rules.” – Hector Barbossa</h2>')
 })
-const PORT = 5555
+const PORT = 5555 || process.env.PORT
 app.listen(PORT, () => console.log(`'Ello ${PORT}.`))

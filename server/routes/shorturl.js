@@ -4,11 +4,14 @@ const validUrl = require("valid-url");
 const config = require("config");
 const Url = require("../models/url");
 const cors = require('cors')
+const ExpressBrute = require('express-brute')
 
 
-var shortUrlRoute = express.Router();
+var shortUrlRoute = express.Router()
+const store = new ExpressBrute.MemoryStore()
+const bruteforce = new ExpressBrute(store)
 
-shortUrlRoute.post("/", cors(), async (req, res)=>{
+shortUrlRoute.post("/", cors(), bruteforce.prevent, async (req, res)=>{
     const longUrl = req.body.longUrl; // The URL the user wants to shorten
     const baseUrl = config.get("baseURL"); // Our server
     const urlCode = nanoid(8)
