@@ -4,6 +4,7 @@ import axios from 'axios'
 
 export const useShortt = () => {
     const baseUrl = 'https://shortt.danielmattox.com'
+    const apiUrl = 'https://shorttapi.danielmattox.com'
     const history = useHistory()
     const [stats, updateStats] = useState({
         total: 0,
@@ -26,7 +27,7 @@ export const useShortt = () => {
     }, [])
 
     const addUrl = values => {
-        axios.post('http://localhost:5555/v1/shorturl', values).then(res => {
+        axios.post(`${apiUrl}/v1/shorturl`, values).then(res => {
             updateOrigUrl(values.longUrl)
             if (res.data.tryUrl && res.data.error) {
                 updateTryUrl({
@@ -67,7 +68,7 @@ export const useShortt = () => {
     }
 
     const getStats = () => {
-        axios.get('http://localhost:5555/stats').then(res => {
+        axios.get(`${apiUrl}/stats`).then(res => {
             updateStats({
                 total: res.data.total,
                 clicks: res.data.clicks,
