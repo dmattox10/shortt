@@ -12,6 +12,7 @@
     "dev": "nodemon --ignore db.json server.js"
   },
   "dependencies": {
+    "cheerio": "^1.0.0-rc.3",
     "config": "^3.3.2",
     "cors": "^2.8.5",
     "express": "^4.17.1",
@@ -20,6 +21,7 @@
     "lowdb": "^1.0.0",
     "mongoose": "^5.10.11",
     "nanoid": "^3.1.16",
+    "request": "^2.88.2",
     "valid-url": "^1.0.9"
   },
   "devDependencies": {

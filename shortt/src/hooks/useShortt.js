@@ -4,7 +4,8 @@ import axios from 'axios'
 
 export const useShortt = () => {
     const baseUrl = 'https://shortt.danielmattox.com'
-    const apiUrl = 'https://shorttapi.danielmattox.com'
+    // const apiUrl = 'https://shorttapi.danielmattox.com'
+    const apiUrl = 'http://localhost:5555'
     const history = useHistory()
     const [stats, updateStats] = useState({
         total: 0,

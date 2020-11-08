@@ -6,7 +6,6 @@ import Message from './components/Message'
 import Banner from './components/Banner'
 import Hero from './components/Hero'
 import Stats from './components/Stats'
-import Presentation from './components/Presentation'
 import Success from './components/Success'
 
 const App = props => {
@@ -33,11 +32,6 @@ const App = props => {
             </Col>
           </Row>
         </Container>
-        <Row>
-          <Container>
-            <Presentation />
-          </Container>
-        </Row>
       </shorttContext.Provider>
     </div>
   );

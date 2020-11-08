@@ -2,7 +2,6 @@ const express = require('express')
 const Url = require('../models/url')
 const low = require('lowdb')
 const FileSync = require('lowdb/adapters/FileSync')
-
 const adapter = new FileSync('db.json')
 const db = low(adapter)
 
@@ -19,6 +18,11 @@ statsRoute.get('/', async (req, res) => {
     const clicksArray = await Url.find({}, {
         clickCount: 1
     })
+    const publicClicks = await Url.find({
+        private: false
+    }).sort({
+        clickCount: 'desc'
+    })
     const totalUrls = clicksArray.length
     const visitors = db.get('visits')
     .value()
@@ -26,10 +30,12 @@ statsRoute.get('/', async (req, res) => {
         return link.clickCount}).reduce((sum, clicks) => {
         return sum + clicks
     }, 0)
+    const top = publicClicks.slice(0, 3)
     res.status(200).json({
         total: totalUrls,
         clicks: clickedOn,
-        visits: visitors
+        visits: visitors,
+        top: top
     })
 })
 

@@ -1,8 +1,15 @@
+import { Container, Row} from 'reactstrap'
+import Popular from './Popular'
 const Presentation = props => {
+    const { top } = props
     return (
-        <div>
-
-        </div>
+        <Container>
+            <Row>
+                {top.map(shortt => (
+                    <Popular shortt={shortt} />
+                ))}
+            </Row>
+        </Container>
     )
 }
 

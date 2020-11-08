@@ -6,7 +6,6 @@ const Url = require("../models/url");
 const cors = require('cors')
 const ExpressBrute = require('express-brute')
 
-
 var shortUrlRoute = express.Router()
 const store = new ExpressBrute.MemoryStore()
 const bruteforce = new ExpressBrute(store)
@@ -58,13 +57,13 @@ shortUrlRoute.post("/", cors(), bruteforce.prevent, async (req, res)=>{
             console.error(err.message);
             return res.status(500).json({
                 error: `Internal server error: ${err.message}`
-            });
+            })
         }
     }else{
         res.status(400).json({
             error: "Invalid URL. Please enter a valid url for shortening."
-        }); // Present this to the user in an error message
+        }) // Present this to the user in an error message
     }    
-});
+})
 
 module.exports = shortUrlRoute;
