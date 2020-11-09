@@ -2,7 +2,7 @@ const express = require("express");
 const Url = require("../models/url");
 const cors = require('cors')
 
-var getShortenUrlRoute = express.Router();
+var getShortenUrlRoute = express.Router({mergeParams: true});
 getShortenUrlRoute.get('/:shortUrl', cors(), async (req, res) => {
     var shortUrlCode = req.params.shortUrl
     var url = await Url.findOne({ urlCode: shortUrlCode });
