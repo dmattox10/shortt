@@ -9,17 +9,25 @@ Everyone knows what this is, what it does, but unlike a lot of similar projects,
 **Front End**
 
 React -  Because I love it! Combined with react-router-dom to make it an SPA
+
 Axios - API calls
+
 Formik and Yup - Form validation
+
 React-Copy-To-Clipboard - Cool component I found to handle copy the end result link for the user
+
 Reactstrap - Bootstrap layout in React components
+
 Bootswatch - All the sexy styling
 
 **Back End**
 
 Express - All the routes
+
 Express-Brute - This is my new boucer, Eb, he'll be in all of my projects from now on preventing abuse!
+
 LowDB - Flat file DB for a single value, visits to the page
+
 Nano-ID - Cool little unique ID generator. I usually use CUID but didn't need as much salty randomness in this project
 
 #### Todo
