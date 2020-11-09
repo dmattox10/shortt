@@ -12,7 +12,6 @@ const Hero = props => {
         initialValues: {
             longUrl: '',
             urlSuffix: '',
-            private: false,
         },
         validationSchema: Yup.object({
             longUrl: Yup.string()
@@ -22,6 +21,7 @@ const Hero = props => {
         }),
         onSubmit: values => {
             values.urlSuffix = suffix
+            values.private = false
             addUrl(values)
         },
     })
@@ -58,12 +58,6 @@ const Hero = props => {
                                 <Col sm={9}>
                                     <Input type='text' name='urlSuffix' id='urlSuffix' value={formik.values.urlSuffix} placeholder='reeses-amazon' bsSize='lg' className={!formik.errors.urlSuffix ? 'form-control is-valid' : 'form-control is-invalid'} onChange={formik.handleChange} onBlur={formik.handleBlur} />
                                     {formik.errors.urlSuffix ? <div className='invalid-feedback'>{formik.errors.urlSuffix}</div> : null}
-                                </Col>
-                            </FormGroup>
-                            <FormGroup>
-                                <Label for='private' sm={3} size='lg'>Private Link?</Label>
-                                <Col sm={9}>
-                                    <CustomInput type='switch' id='private' name='private' label='Don&apos;t show in &quot;top links&quot; below' bsSize='lg' value={formik.values.private} onChange={formik.handleChange} onBlur={formik.handleBlur}/>
                                 </Col>
                             </FormGroup>
                             <Row>

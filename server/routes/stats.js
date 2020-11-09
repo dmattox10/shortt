@@ -3,6 +3,7 @@ const Url = require('../models/url')
 const low = require('lowdb')
 const FileSync = require('lowdb/adapters/FileSync')
 const adapter = new FileSync('db.json')
+const cors = require('cors')
 const db = low(adapter)
 
 if (!db.has('visits').value()) {
@@ -12,7 +13,7 @@ if (!db.has('visits').value()) {
 
 var statsRoute = express.Router()
 
-statsRoute.get('/', async (req, res) => {
+statsRoute.get('/', cors(), async (req, res) => {
     db.update('visits', n => n + 1)
     .write()
     const clicksArray = await Url.find({}, {
