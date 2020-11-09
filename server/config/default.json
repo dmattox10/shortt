@@ -1,4 +1,4 @@
 {
     "mongoURI": "mongodb://mongo:27017/shortt",
-    "baseURL": "https://shortt.danielmattox.com/v1"
+    "baseURL": "https://shorttapi.danielmattox.com/v1"
 }
