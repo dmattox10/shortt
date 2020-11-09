@@ -3,8 +3,7 @@ import { useHistory } from 'react-router-dom'
 import axios from 'axios'
 
 export const useShortt = () => {
-    const baseUrl = 'https://shortt.danielmattox.com'
-    const apiUrl = 'https://shorttapi.danielmattox.com'
+    const baseUrl = 'https://shorttapi.danielmattox.com'
     // const apiUrl = 'http://localhost:5555'
     const history = useHistory()
     const [stats, updateStats] = useState({
@@ -28,7 +27,7 @@ export const useShortt = () => {
     }, [])
 
     const addUrl = values => {
-        axios.post(`${apiUrl}/v1/shorturl`, values).then(res => {
+        axios.post(`${baseUrl}/v1/shorturl`, values).then(res => {
             updateOrigUrl(values.longUrl)
             if (res.data.tryUrl && res.data.error) {
                 updateTryUrl({
@@ -75,7 +74,7 @@ export const useShortt = () => {
     }
 
     const getStats = () => {
-        axios.get(`${apiUrl}/stats`).then(res => {
+        axios.get(`${baseUrl}/stats`).then(res => {
             updateStats({
                 total: res.data.total,
                 clicks: res.data.clicks,
