@@ -24,6 +24,8 @@ Bootswatch - All the sexy styling
 
 **Back End**
 
+[![Build Status](https://drone.danielmattox.com/api/badges/dmattox10/shortt/status.svg)](https://drone.danielmattox.com/dmattox10/shortt)
+
 Express - All the routes
 
 Express-Brute - This is my new boucer, Eb, he'll be in all of my projects from now on preventing abuse!
