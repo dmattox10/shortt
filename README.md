@@ -1,6 +1,9 @@
 # shortt
 A URL shortener, with several cool features
 
+The instructions to get it running are on the README's in both the client (named after the project) and server folders.
+
+
 ## About this project
 Everyone knows what this is, what it does, but unlike a lot of similar projects, I wanted to keep track of how many times a link has been clicked on, and how many times all of the links have been clicked on, as well as how many people have visited, and actually used the tool by comparison. I could have used Google Analytics for most of it, but I don't like google, and so I'll leave that for the workplace, not my personal projects.
 
